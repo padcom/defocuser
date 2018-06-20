@@ -31,6 +31,6 @@ element is _inside_ or _outside_ of the dropdown
 The ```Defocuser``` uses ```MutationObserver``` to detect when the element has been removed from
 the DOM. So you should physically remove the element to clean things up.
 
-There is a gist showing how to use the Defocuser with Vue:
+Please see the following repository to see it in action used as a set of Vue directives
 
-https://gist.github.com/padcom/0a4e4699813d983fc76dfde29406f9e6
+https://github.com/padcom/defocuser-example
