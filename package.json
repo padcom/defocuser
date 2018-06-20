@@ -1,0 +1,17 @@
+{
+  "name": "defocuser",
+  "version": "0.0.1",
+  "description": "Defocuser - automated way to call a function when clicked outside of a specific element or upon Escape key press",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "defocuser"
+  ],
+  "author": "Matthias Hryniszak",
+  "license": "MIT",
+  "devDependencies": {
+    "poi": "^10.2.9"
+  }
+}
