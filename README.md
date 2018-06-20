@@ -16,6 +16,9 @@ call the ```addElement``` method. This method takes 3 parameters:
 * ```el``` - that is the root of your dropdown
 * ```phase``` - that should be either ```capture``` or ```bubbling```
 * ```callback``` - that is the callback called when the situation that the user clicked outside
+* ```stopPropagation``` - when handling the ```keydown``` or click ```events``` call ```e.stopPropagation()```
+* ```preventDefault``` - when handling the ```keydown``` or click ```events``` call ```e.preventDefault()```
+
 of the root.
 
 If for some reason there is an additional element (like an input or label that you use to toggle
