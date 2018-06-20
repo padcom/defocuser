@@ -6,6 +6,10 @@ is a way for me to stop repeating myself and have it working always the way it s
 
 ### Usage
 
+```
+import { Defocuser } from 'defocuser'
+```
+
 To use the Defocuser all you have to do is create an instance of the ```Defocuser``` class and then
 call the ```addElement``` method. This method takes 3 parameters:
 
