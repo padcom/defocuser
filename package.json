@@ -1,6 +1,6 @@
 {
   "name": "defocuser",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Defocuser - automated way to call a function when clicked outside of a specific element or upon Escape key press",
   "main": "index.js",
   "keywords": [

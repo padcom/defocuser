@@ -16,12 +16,16 @@ export class Defocuser {
    * @param {HTMLElement} el root element to watch
    * @param {String} phase phase to watch ('bubbling', 'capture')
    * @param {Function) callback callback to call when detecting either Escape or click outside of el
+   * @param {Boolean} stopPropagation if set to true the event's propagation will be stopped
+   * @param {Boolean} preventDefault if set to true the default behavior of clicked element will be stopped
    */
-  addElement (el, phase, callback) {
+  addElement (el, phase, callback, stopPropagation, preventDefault) {
     this.ensureDataStoreExistsInElement(el)
     el.__defocus.event = callback || (() => {})
     el.__defocus.observer = this.createMutationObserver(el)
     el.__defocus.phase = phase
+    el.__defocus.stopPropagation = stopPropagation
+    el.__defocus.preventDefault = preventDefault
     this.elements.unshift(el)
   }
 
@@ -49,6 +53,8 @@ export class Defocuser {
 
       if (this.isElementOutsideElements(e.target, primary, secondary) && primary.__defocus.event) {
         primary.__defocus.event()
+        if (primary.__defocus.stopPropagation) e.stopPropagation()
+        if (primary.__defocus.preventDefault) e.preventDefault()
       }
     }
   }
@@ -61,6 +67,8 @@ export class Defocuser {
       if (e.code === 'Escape') {
         const primary = this.elements[0]
         primary.__defocus.event()
+        if (primary.__defocus.stopPropagation) e.stopPropagation()
+        if (primary.__defocus.preventDefault) e.preventDefault()
       }
     }
   }
