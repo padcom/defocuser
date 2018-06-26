@@ -1,3 +1,3 @@
-module.exports = {
-  Defocuser: require('./lib/Defocuser')
-}
+import Defocuser from './lib/Defocuser'
+
+export default Defocuser
