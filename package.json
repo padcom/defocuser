@@ -1,15 +1,12 @@
 {
   "name": "defocuser",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "Defocuser - automated way to call a function when clicked outside of a specific element or upon Escape key press",
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c"
   },
-  "main": "index.js",
-  "files": [
-    "dist/defocuser.umd.js"
-  ],
+  "main": "dist/defocuser.umd.js",
   "keywords": [
     "defocuser"
   ],
