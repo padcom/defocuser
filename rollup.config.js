@@ -1,15 +1,15 @@
-import babel from 'rollup-plugin-babel'
-import minify from 'rollup-plugin-minify'
+import uglify from 'rollup-plugin-uglify-es'
+
+import pkg from './package.json'
 
 export default {
-  input: 'index.js',
+  input: pkg.module,
   output: [ {
-    file: 'dist/defocuser.umd.js',
-    format: 'umd',
-    name: 'defocuser',
+    file: pkg.main,
+    format: 'iife',
+    name: 'Defocuser',
   } ],
   plugins: [
-    babel({ exclude: 'node_modules/**' }),
-    minify({ umd: 'dist/defocuser.umd.min.js' })
+    uglify()
   ]
 }

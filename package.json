@@ -1,12 +1,14 @@
 {
   "name": "defocuser",
-  "version": "0.0.12",
+  "version": "0.0.13.beta",
   "description": "Defocuser - automated way to call a function when clicked outside of a specific element or upon Escape key press",
   "scripts": {
     "dev": "rollup -c -w",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublish": "npm run build"
   },
-  "main": "dist/defocuser.umd.js",
+  "module": "index.js",
+  "main": "dist/defocuser.iife.min.js",
   "keywords": [
     "defocuser"
   ],
@@ -17,12 +19,8 @@
     "url": "https://github.com/padcom/defocuser"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-env": "^1.7.0",
     "mkdirp": "^0.5.1",
     "rollup": "^0.61.2",
-    "rollup-plugin-babel": "^3.0.5",
-    "rollup-plugin-minify": "^1.0.3"
+    "rollup-plugin-uglify-es": "0.0.1"
   }
 }

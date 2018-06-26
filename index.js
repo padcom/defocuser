@@ -1,14 +1,13 @@
 /**
  * Defocuser is a utility class that helps implementing closing nested dropdowns
  */
-export default class Defocuser {
-  constructor () {
-    this.elements = []
-    document.addEventListener('click', this.defocus('bubbling').bind(this), { capture: false })
-    document.addEventListener('click', this.defocus('capture').bind(this), { capture: true })
-    document.addEventListener('keydown', this.escape('bubbling').bind(this), { capture: false })
-    document.addEventListener('keydown', this.escape('capture').bind(this), { capture: true })
-  }
+export default function Defocuser() {
+  const elements = []
+
+  document.addEventListener('click', defocus('bubbling').bind(this), { capture: false })
+  document.addEventListener('click', defocus('capture').bind(this), { capture: true })
+  document.addEventListener('keydown', escape('bubbling').bind(this), { capture: false })
+  document.addEventListener('keydown', escape('capture').bind(this), { capture: true })
 
   /**
    * Adds an element to the top of the list
@@ -19,14 +18,14 @@ export default class Defocuser {
    * @param {Boolean} stopPropagation if set to true the event's propagation will be stopped
    * @param {Boolean} preventDefault if set to true the default behavior of clicked element will be stopped
    */
-  addElement (el, phase, callback, stopPropagation, preventDefault) {
-    this.ensureDataStoreExistsInElement(el)
+  this.addElement = function(el, phase, callback, stopPropagation, preventDefault) {
+    ensureDataStoreExistsInElement(el)
     el.__defocus.event = callback || (() => {})
-    el.__defocus.observer = this.createMutationObserver(el)
+    el.__defocus.observer = createMutationObserver(el)
     el.__defocus.phase = phase
     el.__defocus.stopPropagation = stopPropagation
     el.__defocus.preventDefault = preventDefault
-    this.elements.unshift(el)
+    elements.unshift(el)
   }
 
   /**
@@ -35,23 +34,23 @@ export default class Defocuser {
    * @param {HTMLElement} el root element being watched
    * @param {HTMLElement} secondary secondary element to consider for calculation
    */
-  setSecondaryElement (el, secondary) {
-    this.ensureDataStoreExistsInElement(el)
+  this.setSecondaryElement = function(el, secondary) {
+    ensureDataStoreExistsInElement(el)
     el.__defocus.secondary = secondary
   }
 
   // event handlers
 
-  defocus (phase) {
-    return e => {
-      if (this.elements.length === 0 || !this.elements[0].__defocus || phase !== this.elements[0].__defocus.phase) {
+  function defocus (phase) {
+    return function(e) {
+      if (elements.length === 0 || !elements[0].__defocus || phase !== elements[0].__defocus.phase) {
         return
       }
 
-      const primary = this.elements[0]
+      const primary = elements[0]
       const secondary = primary.__defocus.secondary
 
-      if (this.isElementOutsideElements(e.target, primary, secondary) && primary.__defocus.event) {
+      if (isElementOutsideElements(e.target, primary, secondary) && primary.__defocus.event) {
         primary.__defocus.event()
         if (primary.__defocus.stopPropagation) e.stopPropagation()
         if (primary.__defocus.preventDefault) e.preventDefault()
@@ -59,13 +58,13 @@ export default class Defocuser {
     }
   }
 
-  escape (phase) {
+  function escape (phase) {
     return e => {
-      if (this.elements.length === 0 || !this.elements[0].__defocus || phase !== this.elements[0].__defocus.phase) {
+      if (elements.length === 0 || !elements[0].__defocus || phase !== elements[0].__defocus.phase) {
         return
       }
       if (e.code === 'Escape') {
-        const primary = this.elements[0]
+        const primary = elements[0]
         primary.__defocus.event()
         if (primary.__defocus.stopPropagation) e.stopPropagation()
         if (primary.__defocus.preventDefault) e.preventDefault()
@@ -75,7 +74,7 @@ export default class Defocuser {
 
   // private methods
 
-  isElementOutsideElements (el, primary, secondary) {
+  function isElementOutsideElements (el, primary, secondary) {
     let element = el
     while (element) {
       if (element == primary || element == secondary) return false
@@ -84,11 +83,11 @@ export default class Defocuser {
     return true
   }
 
-  ensureDataStoreExistsInElement(el) {
+  function ensureDataStoreExistsInElement(el) {
     if (!el.__defocus) Object.defineProperty(el, '__defocus', { value: {} })
   }
 
-  hasNodeRemovedEvent (el, events) {
+  function hasNodeRemovedEvent (el, events) {
     return events.some(event => {
       for (let i = 0; i < event.removedNodes.length; i++) {
         if (event.removedNodes[i] == el) {
@@ -98,17 +97,17 @@ export default class Defocuser {
     })
   }
 
-  removeElementFromStack (el) {
-    if (this.elements[0] != el) {
+  function removeElementFromStack (el) {
+    if (elements[0] != el) {
       throw new Error('Top element is not the removed one')
     }
-    this.elements.shift()
+    elements.shift()
   }
 
-  createMutationObserver (el) {
+  function createMutationObserver (el) {
     const observer = new MutationObserver(events => {
-      if (this.hasNodeRemovedEvent(el, events)) {
-        this.removeElementFromStack(el)
+      if (hasNodeRemovedEvent(el, events)) {
+        removeElementFromStack(el)
         observer.disconnect()
       }
     })
