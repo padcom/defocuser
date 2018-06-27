@@ -11,13 +11,13 @@ import { Defocuser } from 'defocuser'
 ```
 
 To use the Defocuser all you have to do is create an instance of the ```Defocuser``` class and then
-call the ```addElement``` method. This method takes 3 parameters:
+call the ```addElement``` method. This method takes 5 parameters:
 
 * ```el``` - that is the root of your dropdown
-* ```phase``` - that should be either ```capture``` or ```bubbling```
-* ```callback``` - that is the callback called when the situation that the user clicked outside
-* ```stopPropagation``` - when handling the ```keydown``` or ```click``` events call ```e.stopPropagation()```
-* ```preventDefault``` - when handling the ```keydown``` or ```click``` events call ```e.preventDefault()```
+* ```phase``` - that should be either ```capture``` or ```bubbling``` (default: `bubbling`)
+* ```callback``` - that is the callback called when the situation that the user clicked outside (default: noop)
+* ```stopPropagation``` - when handling the ```keydown``` or ```click``` events call ```e.stopPropagation()``` (default: `false`)
+* ```preventDefault``` - when handling the ```keydown``` or ```click``` events call ```e.preventDefault()``` (default: `false`)
 
 If for some reason there is an additional element (like an input or label that you use to toggle
 your dropdow) ```Defocuser``` has you covered with the ```setSecondaryElement``` method that takes
