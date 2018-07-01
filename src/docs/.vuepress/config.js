@@ -1,6 +1,7 @@
 module.exports = {
   title: 'Defocuser',
   description: 'Utility for detecting clicks outside of an element',
+  base: '/defocuser/',
   themeConfig: {
     repo: 'padcom/defocuser',
     locales: {
@@ -11,6 +12,9 @@ module.exports = {
         nav: [ {
           text: 'Guide',
           link: '/guide/'
+        }, {
+          text: 'API',
+          link: '/api/'
         } ]
       }
     }

@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
+    "docs:dev": "vuepress dev src/docs",
+    "docs:build": "vuepress build -d docs src/docs",
     "prepublish": "npm run build"
   },
   "module": "index.js",
