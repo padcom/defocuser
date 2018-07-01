@@ -46,7 +46,7 @@ select the phase the callback should be called and provide the actual callback i
 ```
 const popup = document.querySelector('#popup')
 const defocuser = new Defocuser()
-defocuser.addElement(, 'bubbling', () => { popup.remove() })
+defocuser.addElement(popup, 'bubbling', () => { popup.remove() })
 ```
 
 Please note the callback calls `remove()` on the popup effectively removing it from the DOM tree.

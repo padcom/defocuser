@@ -7,7 +7,7 @@
     <meta name="description" content="Utility for detecting clicks outside of an element">
     
     
-    <link rel="preload" href="/defocuser/assets/css/3.styles.b421779c.css" as="style"><link rel="preload" href="/defocuser/assets/js/app.5601731c.js" as="script"><link rel="preload" href="/defocuser/assets/js/1.57d42e2a.js" as="script"><link rel="prefetch" href="/defocuser/assets/js/0.bd32c31d.js"><link rel="prefetch" href="/defocuser/assets/js/2.fe08fa3d.js">
+    <link rel="preload" href="/defocuser/assets/css/3.styles.b421779c.css" as="style"><link rel="preload" href="/defocuser/assets/js/app.cab3adce.js" as="script"><link rel="preload" href="/defocuser/assets/js/1.862be92c.js" as="script"><link rel="prefetch" href="/defocuser/assets/js/0.bd32c31d.js"><link rel="prefetch" href="/defocuser/assets/js/2.fe08fa3d.js">
     <link rel="stylesheet" href="/defocuser/assets/css/3.styles.b421779c.css">
   </head>
   <body>
@@ -31,7 +31,7 @@ either directly using a <code>&lt;script&gt;</code> tag:</p><div class="language
 </code></pre></div><p>Once you have decided which way you want to include it create an instance of <code>Defocuser</code> and add the root element of your dialog/popup/dropdown,
 select the phase the callback should be called and provide the actual callback itself:</p><div class="language- extra-class"><pre class="language-text"><code>const popup = document.querySelector('#popup')
 const defocuser = new Defocuser()
-defocuser.addElement(, 'bubbling', () =&gt; { popup.remove() })
+defocuser.addElement(popup, 'bubbling', () =&gt; { popup.remove() })
 </code></pre></div><p>Please note the callback calls <code>remove()</code> on the popup effectively removing it from the DOM tree.
 Defocuser interally uses <code>MutationObserver</code> and once it detects that the added node is removed
 it is also removed from the internal state of defocuser.</p><p>It works this way because <code>Defocuser</code> is ready for stacked elements!
@@ -50,6 +50,6 @@ defocuser.setSecondaryElement(dropdown, secondary)
 </code></pre></div><p>This way when <code>defocuser</code> checks if the click happened outside of your dropdown it will also take the <code>secondary</code> element into account
 as though it would be inside of your dropdown.</p><p>It is especially usefull when your <code>input</code> steers some part of your dropdown (like selecting start and end date of a period of time).</p><h2 id="remarks"><a href="#remarks" aria-hidden="true" class="header-anchor">#</a> Remarks</h2><p>The <code>Defocuser</code> uses <code>MutationObserver</code> to detect when the element has been removed from
 the DOM. So you should physically remove the element to clean things up.</p></div><div class="page-edit"><!----><!----></div><!----></div></div></div>
-    <script src="/defocuser/assets/js/1.57d42e2a.js" defer></script><script src="/defocuser/assets/js/app.5601731c.js" defer></script>
+    <script src="/defocuser/assets/js/1.862be92c.js" defer></script><script src="/defocuser/assets/js/app.cab3adce.js" defer></script>
   </body>
 </html>
