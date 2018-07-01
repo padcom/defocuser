@@ -21,6 +21,7 @@
   "devDependencies": {
     "mkdirp": "^0.5.1",
     "rollup": "^0.61.2",
-    "rollup-plugin-uglify-es": "0.0.1"
+    "rollup-plugin-uglify-es": "0.0.1",
+    "vuepress": "^0.10.2"
   }
 }

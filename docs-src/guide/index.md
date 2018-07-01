@@ -1,13 +1,26 @@
-## Defocuser
+---
+sidebar: auto
+footer: Apache 2.0 Licensed | Copyright © 2018-present Matthias Hryniszak
+---
+
+# Introduction
 
 It has been way too many times when I implemented (with greater or lesser success) automated way
 for closing dropdowns when clicking outside of them or by pressing the Escape key. This utility
 is a way for me to stop repeating myself and have it working always the way it should.
 
-### Usage
+# How it works
+
+When a new instance of `Defocuser` is created it hooks itself to `document`'s `click` and `keydown` events.
+When the user presses the `Escape` key or clicks anywhere defocuser checks if there are any elements
+added to it using the `addElement` method. If that is the case it checks if the click happened within the
+tree that has the `el` as parent. If that is the case it does nothing. However if the element clicked is not
+within the currently actioned element on the page then the given callback is executed.
+
+## Usage
 
 ```
-import Defocuser from 'defocuser'
+import { Defocuser } from 'defocuser'
 ```
 
 To use the Defocuser all you have to do is create an instance of the ```Defocuser``` class and then
@@ -27,7 +40,7 @@ the following parameters:
 * ```secondary``` - that additional element to be taken into account when checking if the actioned
 element is _inside_ or _outside_ of the dropdown
 
-### Remarks
+## Remarks
 
 The ```Defocuser``` uses ```MutationObserver``` to detect when the element has been removed from
 the DOM. So you should physically remove the element to clean things up.

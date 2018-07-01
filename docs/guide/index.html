@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Introduction | Defocuser</title>
+    <meta name="description" content="Utility for detecting clicks outside of an element">
+    
+    
+    <link rel="preload" href="/assets/css/2.styles.9a2bc629.css" as="style"><link rel="preload" href="/assets/js/app.a1ee6a1b.js" as="script"><link rel="preload" href="/assets/js/1.f00f5f91.js" as="script"><link rel="prefetch" href="/assets/js/0.f59c8d82.js">
+    <link rel="stylesheet" href="/assets/css/2.styles.9a2bc629.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      Defocuser
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link router-link-exact-active router-link-active">Guide</a></div><a href="https://github.com/padcom/defocuser" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link router-link-exact-active router-link-active">Guide</a></div><a href="https://github.com/padcom/defocuser" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>Introduction</span><!----></p><ul class="sidebar-group-items"><li><a href="/guide/#usage" class="sidebar-link">Usage</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/guide/#remarks" class="sidebar-link">Remarks</a><ul class="sidebar-sub-headers"></ul></li></ul></div></li></ul></div><div class="page"><div class="content"><h1 id="introduction"><a href="#introduction" aria-hidden="true" class="header-anchor">#</a> Introduction</h1><p>It has been way too many times when I implemented (with greater or lesser success) automated way
+for closing dropdowns when clicking outside of them or by pressing the Escape key. This utility
+is a way for me to stop repeating myself and have it working always the way it should.</p><h1 id="how-it-works"><a href="#how-it-works" aria-hidden="true" class="header-anchor">#</a> How it works</h1><p>When a new instance of <code>Defocuser</code> is created it hooks itself to <code>document</code>'s <code>click</code> and <code>keydown</code> events.
+When the user presses the <code>Escape</code> key or clicks anywhere defocuser checks if there are any elements
+added to it using the <code>addElement</code> method. If that is the case it checks if the click happened within the
+tree that has the <code>el</code> as parent. If that is the case it does nothing. However if the element clicked is not
+within the currently actioned element on the page then the given callback is executed.</p><h2 id="usage"><a href="#usage" aria-hidden="true" class="header-anchor">#</a> Usage</h2><div class="language- extra-class"><pre class="language-text"><code>import { Defocuser } from 'defocuser'
+</code></pre></div><p>To use the Defocuser all you have to do is create an instance of the <code>Defocuser</code> class and then
+call the <code>addElement</code> method. This method takes 5 parameters:</p><ul><li><code>el</code> - that is the root of your dropdown</li><li><code>phase</code> - that should be either <code>capture</code> or <code>bubbling</code></li><li><code>callback</code> - that is the callback called when the situation that the user clicked outside</li><li><code>stopPropagation</code> - when handling the <code>keydown</code> or <code>click</code> events call <code>e.stopPropagation()</code> (default: <code>false</code>)</li><li><code>preventDefault</code> - when handling the <code>keydown</code> or <code>click</code> events call <code>e.preventDefault()</code> (default: <code>false</code>)</li></ul><p>If for some reason there is an additional element (like an input or label that you use to toggle
+your dropdow) <code>Defocuser</code> has you covered with the <code>setSecondaryElement</code> method that takes
+the following parameters:</p><ul><li><code>el</code> - that is the root of your dropdown (primary)</li><li><code>secondary</code> - that additional element to be taken into account when checking if the actioned
+element is <em>inside</em> or <em>outside</em> of the dropdown</li></ul><h2 id="remarks"><a href="#remarks" aria-hidden="true" class="header-anchor">#</a> Remarks</h2><p>The <code>Defocuser</code> uses <code>MutationObserver</code> to detect when the element has been removed from
+the DOM. So you should physically remove the element to clean things up.</p><p>Please see the following repository to see it in action used as a set of Vue directives</p><p>https://github.com/padcom/defocuser-example</p></div><div class="page-edit"><!----><!----></div><!----></div></div></div>
+    <script src="/assets/js/1.f00f5f91.js" defer></script><script src="/assets/js/app.a1ee6a1b.js" defer></script>
+  </body>
+</html>
